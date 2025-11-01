@@ -3,7 +3,7 @@ import Overview from './components/Overview';
 import {formatInt, getCookie, setCookie} from './services/parsingUtils';
 import {useQuery} from "@tanstack/react-query";
 import getProcessingTimesDataFromIRCC, {IRCC_API_URL, QUERY_KEY_PROCESSING_TIMES} from "./services/IRCC-api.ts";
-import {trackButtonClick} from "@/utils/analytics.ts";
+import {trackButtonClick, trackEvent} from "@/utils/analytics.ts";
 import {GoogleAnalytics} from "@/components/GoogleAnalytics.tsx";
 
 type Theme = 'dark' | 'light';
@@ -168,7 +168,7 @@ const App: React.FC = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="font-semibold text-gray-700 dark:text-gray-300 capitalize"
-                                    onClick={() => trackButtonClick('View Source', 'Viewed IRCC API Source')}
+                                    onClick={() => trackEvent('Viewed IRCC API Source', 'Viewed IRCC API Source')}
                                 >
                                     Click Here
                                 </a>
