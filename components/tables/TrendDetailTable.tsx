@@ -1,8 +1,7 @@
 import React, {useMemo, useState} from 'react';
 import {CategoryMonthRow} from '../../types';
 import {formatInt} from '../../services/parsingUtils';
-import {logEvent} from "@/utils/analytics.ts";
-import {IRCC_API_URL} from "@/services/IRCC-api.ts";
+import {trackButtonClick} from "@/utils/analytics.ts";
 
 interface TrendDetailTableProps {
     programName: string;
@@ -55,12 +54,7 @@ const TrendDetailTable: React.FC<TrendDetailTableProps> = ({programName, seriesD
                     <button
                         onClick={() => {
                             setMonthsToShow(prev => prev + 6)
-                            logEvent("button_click", {
-                                category: "Engagement",
-                                label: "Show Previous 6 Months Trend Detail",
-                                programName: programName,
-                                monthsData: monthsToShow,
-                            })
+                            trackButtonClick("Show More Months", programName, monthsToShow);
                         }}
                         className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800"
                     >

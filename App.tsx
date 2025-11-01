@@ -3,7 +3,7 @@ import Overview from './components/Overview';
 import {formatInt, getCookie, setCookie} from './services/parsingUtils';
 import {useQuery} from "@tanstack/react-query";
 import getProcessingTimesDataFromIRCC, {IRCC_API_URL, QUERY_KEY_PROCESSING_TIMES} from "./services/IRCC-api.ts";
-import {logEvent} from "@/utils/analytics.ts";
+import {trackButtonClick} from "@/utils/analytics.ts";
 import {GoogleAnalytics} from "@/components/GoogleAnalytics.tsx";
 
 type Theme = 'dark' | 'light';
@@ -137,7 +137,8 @@ const App: React.FC = () => {
                         <div className="flex items-center justify-between h-16">
                         <span className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
                             <span className="sm:hidden md:hidden">IRCC Pulse 🇨🇦</span>
-                            <span className="hidden sm:inline">IRCC Pulse - Realtime Analysis of IRCC Applications 🇨🇦</span>
+                            <span
+                                className="hidden sm:inline">IRCC Pulse - Realtime Analysis of IRCC Applications 🇨🇦</span>
                         </span>
                             <div className="flex items-center space-x-2 sm:space-x-4">
                                 <button
@@ -160,20 +161,14 @@ const App: React.FC = () => {
                                 Last Updated: <span
                                 className="font-semibold text-gray-700 dark:text-gray-300">{headerInfo.lastUpdated}</span> |
                                 <span
-                                className="font-semibold text-gray-700 dark:text-gray-300 capitalize"> Updated {headerInfo.interval}</span> |
+                                    className="font-semibold text-gray-700 dark:text-gray-300 capitalize"> Updated {headerInfo.interval}</span> |
                                 Source:{" "}
                                 <a
                                     href={IRCC_API_URL}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="font-semibold text-gray-700 dark:text-gray-300 capitalize"
-                                    onClick={() =>
-                                        logEvent("source_click_here", {
-                                            category: "Engagement",
-                                            label: "IRCC API Source",
-                                            url: IRCC_API_URL,
-                                        })
-                                    }
+                                    onClick={() => trackButtonClick('View Source', 'Viewed IRCC API Source')}
                                 >
                                     Click Here
                                 </a>

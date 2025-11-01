@@ -5,8 +5,24 @@ declare global {
     }
 }
 
-export const logEvent = (action: string, params?: Record<string, any>) => {
-    if (typeof window.gtag !== "function") return;
+// Check if we're in browser environment
+const isBrowser = typeof window !== "undefined"
 
-    window.gtag("event", action, params);
-};
+export const trackEvent = (action: string, category: string, label?: string, value?: number) => {
+    if (isBrowser && window.gtag) {
+        try {
+            window.gtag("event", action, {
+                event_category: category,
+                event_label: label,
+                value: value,
+            })
+        } catch (error) {
+            console.warn("GA event tracking failed:", error)
+        }
+    }
+}
+
+// Track button clicks
+export const trackButtonClick = (category: string, label?: string, value?: number) => {
+    trackEvent("Button Click", category, label, value);
+}
