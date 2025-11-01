@@ -21,22 +21,17 @@ export const initGA = () => {
 
     // Initialize dataLayer and config
     window.dataLayer = window.dataLayer || [];
-    function gtag(...args: any[]) { window.dataLayer.push(args); }
-    window.gtag = gtag;
+    window.gtag = function (...args: any[]) {
+        window.dataLayer.push(args);
+    };
 
-    gtag("js", new Date());
-    gtag("config", GA_ID, {
-        send_page_view: true,
-    });
-};
+    script.onload = () => {
+        window.gtag("js", new Date());
+        window.gtag("config", GA_ID, {send_page_view: true});
+        window.gtag("event", "page_view", {page_path: window.location.pathname});
+    };
 
-export const logPageView = (path: string) => {
-    const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID;
-    if (typeof window.gtag !== "function" || !GA_ID) return;
-
-    window.gtag("event", "page_view", {
-        page_path: path,
-    });
+    document.head.appendChild(script);
 };
 
 export const logEvent = (action: string, params?: Record<string, any>) => {

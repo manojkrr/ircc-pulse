@@ -3,7 +3,7 @@ import Overview from './components/Overview';
 import {formatInt, getCookie, setCookie} from './services/parsingUtils';
 import {useQuery} from "@tanstack/react-query";
 import getProcessingTimesDataFromIRCC, {IRCC_API_URL, QUERY_KEY_PROCESSING_TIMES} from "./services/IRCC-api.ts";
-import {initGA, logEvent, logPageView} from "@/utils/analytics.ts";
+import {initGA, logEvent} from "@/utils/analytics.ts";
 
 type Theme = 'dark' | 'light';
 
@@ -13,10 +13,6 @@ const App: React.FC = () => {
 
     useEffect(() => {
         initGA();
-        logPageView(window.location.pathname);
-    }, []);
-
-    useEffect(() => {
         const savedTheme = getCookie('theme') as Theme | undefined;
         setTheme(savedTheme || 'dark');
     }, []);
