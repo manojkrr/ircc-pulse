@@ -1,0 +1,5 @@
+{
+  "name": "Realtime Analysis of IRCC Applications",
+  "description": "A web application to analyze and visualize Canadian immigration processing time data, providing insights into wait times and application trends across various programs.",
+  "requestFramePermissions": []
+}

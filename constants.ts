@@ -1,0 +1,38 @@
+export const NAME_MAPPING: Record<string, string> = {
+  "aip": "Agri-Food Immigration Pilot",
+  "cec": "Canadian Experience Class",
+  "fsw": "Federal Skilled Worker",
+  "government-refugees-quebec": "Refugees - Government-Assisted Refugees (Quebec)",
+  "government-refugees-roc": "Refugees - Government-Assisted Refugees (Rest of Canada)",
+  "humanitarian-quebec": "Humanitarian and Compassionate (Quebec)",
+  "humanitarian-roc": "Humanitarian and Compassionate (Rest of Canada)",
+  "pgp-quebec": "Parents and Grandparents Program (Quebec)",
+  "pgp-roc": "Parents and Grandparents Program (Rest of Canada)",
+  "pnp-base": "Provincial Nominee Program (Non Express Entry)",
+  "pnp-ee": "Provincial Nominee Program (Express Entry)",
+  "protected-persons-quebec": "Refugees - Protected Persons in Canada (Quebec)",
+  "protected-persons-roc": "Refugees - Protected Persons in Canada (Rest of Canada)",
+  "private-refugees-quebec": "Refugees - Private Sponsorship of Refugees (Quebec)",
+  "private-refugees-roc": "Refugees - Private Sponsorship of Refugees (Rest of Canada)",
+  "qsw": "Quebec Skilled Worker",
+  "quebec-business": "Quebec Business",
+  "self-employed": "Self-Employed Persons",
+  "startup-visa": "Start-up Visa",
+  "spousal-canada-quebec": "Spousal/Common-Law Partner in Canada Class (Quebec)",
+  "spousal-canada-roc": "Spousal/Common-Law Partner in Canada Class (Rest of Canada)",
+  "spousal-abroad-quebec": "Family Class - Spousal/Common-Law Partner from Abroad (Quebec)",
+  "spousal-abroad-roc": "Family Class - Spousal/Common-Law Partner from Abroad (Rest of Canada)",
+  "childcare-pilot-experience": "Caregiver Pilot - Childcare (Experience)",
+  "childcare-pilot-pr": "Caregiver Pilot - Childcare (Permanent Residence)",
+  "support-worker-experience": "Caregiver Pilot - Support Worker (Experience)",
+  "support-worker-pr": "Caregiver Pilot - Support Worker (Permanent Residence)",
+  "citizen-grants": "Citizenship Grants",
+  "citizen-proofs": "Proof of Citizenship"
+};
+
+export const TREND_THRESHOLDS = {
+  MOM_UP: 5,
+  MOM_DOWN: -5,
+  CMGR_UP: 3,
+  CMGR_DOWN: -3,
+};
