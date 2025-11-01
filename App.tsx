@@ -12,8 +12,7 @@ const App: React.FC = () => {
 
     useEffect(() => {
         const savedTheme = getCookie('theme') as Theme | undefined;
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
+        setTheme(savedTheme || 'dark');
     }, []);
 
     useEffect(() => {
