@@ -30,8 +30,6 @@ export const initGA = () => {
         window.gtag("config", GA_ID, {send_page_view: true});
         window.gtag("event", "page_view", {page_path: window.location.pathname});
     };
-
-    document.head.appendChild(script);
 };
 
 export const logEvent = (action: string, params?: Record<string, any>) => {
