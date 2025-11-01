@@ -3,7 +3,8 @@ import Overview from './components/Overview';
 import {formatInt, getCookie, setCookie} from './services/parsingUtils';
 import {useQuery} from "@tanstack/react-query";
 import getProcessingTimesDataFromIRCC, {IRCC_API_URL, QUERY_KEY_PROCESSING_TIMES} from "./services/IRCC-api.ts";
-import {initGA, logEvent} from "@/utils/analytics.ts";
+import {logEvent} from "@/utils/analytics.ts";
+import {GoogleAnalytics} from "@/components/GoogleAnalytics.tsx";
 
 type Theme = 'dark' | 'light';
 
@@ -12,7 +13,6 @@ const App: React.FC = () => {
     const [processError, setProcessError] = useState<string | null>(null)
 
     useEffect(() => {
-        initGA();
         const savedTheme = getCookie('theme') as Theme | undefined;
         setTheme(savedTheme || 'dark');
     }, []);
@@ -129,6 +129,7 @@ const App: React.FC = () => {
 
     return (
         <>
+            <GoogleAnalytics/>
             <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 font-sans">
                 <header
                     className="bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700">
