@@ -8,8 +8,8 @@ declare global {
 export const initGA = () => {
     const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID;
 
-    if (!GA_ID || import.meta.env.MODE !== "production") {
-        console.warn("GA not initialized (dev mode or missing ID)");
+    if (!GA_ID) {
+        console.warn("GA not initialized (missing ID)");
         return;
     }
 
