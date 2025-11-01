@@ -3,12 +3,18 @@ import Overview from './components/Overview';
 import {formatInt, getCookie, setCookie} from './services/parsingUtils';
 import {useQuery} from "@tanstack/react-query";
 import getProcessingTimesDataFromIRCC, {IRCC_API_URL, QUERY_KEY_PROCESSING_TIMES} from "./services/IRCC-api.ts";
+import {initGA, logEvent, logPageView} from "@/utils/analytics.ts";
 
 type Theme = 'dark' | 'light';
 
 const App: React.FC = () => {
     const [theme, setTheme] = useState<Theme>('dark');
     const [processError, setProcessError] = useState<string | null>(null)
+
+    useEffect(() => {
+        initGA();
+        logPageView(window.location.pathname);
+    }, []);
 
     useEffect(() => {
         const savedTheme = getCookie('theme') as Theme | undefined;
@@ -133,7 +139,8 @@ const App: React.FC = () => {
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex items-center justify-between h-16">
                         <span className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
-                            IRCC Pulse - Realtime Analysis of IRCC Applications
+                            <span className="sm:hidden md:hidden">IRCC Pulse 🇨🇦</span>
+                            <span className="hidden sm:inline">IRCC Pulse - Realtime Analysis of IRCC Applications 🇨🇦</span>
                         </span>
                             <div className="flex items-center space-x-2 sm:space-x-4">
                                 <button
@@ -148,18 +155,31 @@ const App: React.FC = () => {
                         <div
                             className="flex justify-end items-center space-x-6 text-xs text-gray-500 dark:text-gray-400 pb-2">
                             <div className="text-sm">
-                                <span className="font-medium">Total People Waiting For A Decision: </span>
+                                <span className="font-medium">People Waiting For A Decision: </span>
                                 <span
                                     className="font-bold text-lg text-gray-800 dark:text-gray-100">{totalPeopleApplied > 0 ? formatInt(totalPeopleApplied) : 'N/A'}</span>
                             </div>
                             <div>
                                 Last Updated: <span
                                 className="font-semibold text-gray-700 dark:text-gray-300">{headerInfo.lastUpdated}</span> |
-                                Update Interval: <span
-                                className="font-semibold text-gray-700 dark:text-gray-300 capitalize">{headerInfo.interval}</span> |
-                                Source: <a href={IRCC_API_URL} target="_blank"
-                                           className="font-semibold text-gray-700 dark:text-gray-300 capitalize">
-                                Click Here</a>
+                                <span
+                                className="font-semibold text-gray-700 dark:text-gray-300 capitalize"> Updated {headerInfo.interval}</span> |
+                                Source:{" "}
+                                <a
+                                    href={IRCC_API_URL}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="font-semibold text-gray-700 dark:text-gray-300 capitalize"
+                                    onClick={() =>
+                                        logEvent("source_click_here", {
+                                            category: "Engagement",
+                                            label: "IRCC API Source",
+                                            url: IRCC_API_URL,
+                                        })
+                                    }
+                                >
+                                    Click Here
+                                </a>
                             </div>
                         </div>
                     </div>
